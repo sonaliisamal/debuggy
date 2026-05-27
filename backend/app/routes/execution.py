@@ -1,6 +1,13 @@
+import os
+import sys
 from fastapi import APIRouter, HTTPException
-from app.models.schemas import TraceRequest  # type: ignore
-from app.tracer.engine import CodeTracer      # type: ignore
+
+# Dynamically force Python to see where this file lives locally
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Import cleanly via localized namespace paths
+from models.schemas import TraceRequest
+from tracer.engine import CodeTracer
 
 router = APIRouter(prefix="/api", tags=["Execution Engine"])
 
